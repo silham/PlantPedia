@@ -1,0 +1,33 @@
+.hero {
+  background-image: url("/hero-bg.webp");
+}
+
+.animate-sideSearchBtn-in {
+  animation: animation-search-in 500ms ease-in forwards;
+}
+
+@keyframes animation-search-in {
+  0% {
+    opacity: 0;
+    right: 0;
+  }
+  100% {
+    opacity: 1;
+    right: 60px;
+  }
+}
+
+.animate-sideSearchBtn-out {
+  animation: animation-search-out 500ms ease-out forwards;
+}
+
+@keyframes animation-search-out {
+  0% {
+    opacity: 1;
+    right: 60px;
+  }
+  100% {
+    opacity: 0;
+    right: 0;
+  }
+}

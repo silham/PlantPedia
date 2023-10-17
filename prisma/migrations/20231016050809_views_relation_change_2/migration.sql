@@ -1,0 +1,2 @@
+-- AddForeignKey
+ALTER TABLE "Views" ADD CONSTRAINT "Views_viewId_fkey" FOREIGN KEY ("viewId") REFERENCES "Plants"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

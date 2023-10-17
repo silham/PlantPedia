@@ -1,0 +1,39 @@
+.hero_bg_gradient {
+  background: rgb(114, 166, 3);
+  background: -moz-linear-gradient(
+    0deg,
+    rgba(114, 166, 3, 1) 0%,
+    rgba(27, 64, 1, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    0deg,
+    rgba(114, 166, 3, 1) 0%,
+    rgba(27, 64, 1, 1) 100%
+  );
+  background: linear-gradient(
+    0deg,
+    rgba(114, 166, 3, 1) 0%,
+    rgba(27, 64, 1, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#72a603",endColorstr="#1b4001",GradientType=1);
+}
+
+.header_bg_gradient {
+  background: rgb(114, 166, 3);
+  background: -moz-linear-gradient(
+    0deg,
+    rgb(91, 131, 4) 0%,
+    rgba(27, 64, 1, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    0deg,
+    rgba(91, 131, 4) 0%,
+    rgba(27, 64, 1, 1) 100%
+  );
+  background: linear-gradient(
+    0deg,
+    rgba(91, 131, 4) 0%,
+    rgba(27, 64, 1, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#72a603",endColorstr="#1b4001",GradientType=1);
+}

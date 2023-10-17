@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Plants {
+  id              String      @id @default(uuid())
+  common_name     String
+  scientific_name String      @unique
+  synonyms        String[]
+  description     String?
+  taxonomy        Taxonomy    @relation(fields: [taxonomyId], references: [id])
+  min_h           Int?
+  max_h           Int?
+  min_ph          Float?
+  max_ph          Float?
+  min_temp        Int?
+  max_temp        Int?
+  water           Level?      @default(M)
+  habit           String?
+  wikipedia       String?
+  britannica      String?
+  img             String?
+  imgs            String[]
+  pests           Pests[]
+  blights         Blights[]
+  taxonomyId      String      @unique
+  PlantOfDay      PlantOfDay?
+  Views           Views?      @relation(fields: [viewsId], references: [id])
+  viewsId         String?
+}
+
+model Pests {
+  id              String       @id @default(uuid())
+  common_name     String
+  synonyms        String[]
+  scientific_name String       @unique
+  description     String?
+  wikipedia       String?
+  britannica      String?
+  img             String?
+  imgs            String[]
+  taxonomy        Taxonomy     @relation(fields: [taxonomyId], references: [id])
+  taxonomyId      String       @unique
+  plants          Plants[]
+  pestisides      Pestisides[]
+}
+
+model Blights {
+  id              String       @id @default(uuid())
+  common_name     String
+  synonyms        String[]
+  scientific_name String       @unique
+  description     String?
+  wikipedia       String?
+  britannica      String?
+  img             String?
+  imgs            String[]
+  taxonomy        Taxonomy     @relation(fields: [taxonomyId], references: [id])
+  taxonomyId      String       @unique
+  plants          Plants[]
+  pestisides      Pestisides[]
+}
+
+model Pestisides {
+  id              String    @id @default(uuid())
+  common_name     String?
+  synonyms        String[]
+  scientific_name String?   @unique
+  description     String?
+  wikipedia       String?
+  britannica      String?
+  img             String?
+  pests           Pests[]
+  blights         Blights[]
+}
+
+model Taxonomy {
+  id      String   @id @default(uuid())
+  kingdom String?
+  phylum  String?
+  class   String?
+  order   String?
+  family  String?
+  genus   String?
+  species String?
+  plant   Plants?
+  pest    Pests?
+  blight  Blights?
+}
+
+model Search {
+  id              String  @id @default(uuid())
+  common_name     String?
+  scientific_name String? @unique
+  decription      String?
+  img             String?
+  type            Type?
+  views           Int?    @default(0)
+}
+
+model PlantOfDay {
+  id       String @id @default(uuid())
+  plant    Plants @relation(fields: [plantsId], references: [id])
+  plantsId String @unique
+}
+
+model Views {
+  id    String   @id @default(uuid())
+  plant Plants[]
+}
+
+enum Level {
+  H
+  M
+  L
+}
+
+enum Type {
+  PLANTS
+  PESTS
+  BLIGHTS
+}

@@ -1,0 +1,4 @@
+.chat-scroll {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}

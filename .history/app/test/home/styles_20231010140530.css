@@ -1,7 +1,0 @@
-.hero {
-  background-image: url("/hero-bg.png");
-}
-
-.animate-sideSearchBtn {
-  animation: animation-search 500ms ease-in forwards;
-}

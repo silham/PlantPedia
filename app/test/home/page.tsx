@@ -6,6 +6,7 @@ import PlantOfDay from "./PlantOfDay";
 import Chat from "../Chat/Chat";
 import TrendingTopics from "./TrendingTopics";
 import ContactUs from "./Contact";
+import AgroAI from "./AgroAI";
 
 const Home = () => {
   return (
@@ -48,6 +49,10 @@ const Home = () => {
 
       <section className="w-[100vw] px-[100px]">
         <TrendingTopics />
+      </section>
+
+      <section className="w-[100vw] px-[180px]">
+        <AgroAI />
       </section>
 
       <section className="w-[100vw] px-[180px]">

@@ -22,12 +22,7 @@ export default function ContactUs() {
     const template_id = process.env.NEXT_PUBLIC_EMAIL_TEMPLATE_ID;
     const user_id = process.env.NEXT_PUBLIC_EMAIL_USER_ID;
     if (service_id && template_id && user_id) {
-      emailjs.send(
-        "service_vztfqy3",
-        "template_8uumb6m",
-        data,
-        "G15n30binc7Gxi2oR"
-      );
+      emailjs.send(service_id, template_id, data, user_id);
       reset();
     } else {
       console.error(".env fetching error");
@@ -37,7 +32,7 @@ export default function ContactUs() {
   return (
     <div className="flex rounded-xl bg-custom-blue-green w-full pb-6 my-[5vh] flex-col shadow-md overflow-hidden px-8">
       <div className="w-full text-[52px] font-black text-center text-white">
-        Contact Us
+        <h3>Contact Us</h3>
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}

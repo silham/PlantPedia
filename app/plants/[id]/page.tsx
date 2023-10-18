@@ -1,6 +1,8 @@
 "use client";
 import { Navbar } from "@/app/components/Nav";
 import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import ViewTracker from "@/app/utils/TrackViews";
 interface Props {
   params: { id: string };
@@ -37,21 +39,31 @@ const Plant = ({ params: { id } }: Props) => {
   useEffect(() => {
     if (!isInitialized.current) {
       const fetchPlant = async () => {
-        const res = await fetch(`api/plants/${plantId}`);
+        const res = await fetch(`/api/plants/${plantId}`);
         const data: Plant = await res.json();
         setPlant(data);
         if (plant?.id == plantId) {
+          console.log(plant);
           isPlantFound.current = true;
         }
       };
       fetchPlant();
     }
-  });
+  }, [plant, plantId]);
 
   return (
     <>
-      <div className="first-letter:capitalize">
-        {plant && plant.common_name}
+      <div className="w-[100vh]">
+        <header>
+          <div className="h-full flex items-center justify-center">
+            <Image src="/plantpedia.png" width={200} height={90} alt="logo" />
+          </div>
+          <nav className="flex justify-between text-[16px] font-semibold text-white w-[25%]">
+            <Link href="/plants">Plants</Link>
+            <Link href="/blogs">Blogs</Link>
+            <Link href="/about#">About</Link>
+          </nav>
+        </header>
       </div>
       {/*isPlantFound ? <ViewTracker id={plantId} /> : null*/}
     </>

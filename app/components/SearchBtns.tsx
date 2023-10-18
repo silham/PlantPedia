@@ -1,7 +1,7 @@
 "use client";
 import SearchBox from "@/app/components/SearchBox";
 import { useEffect, useRef } from "react";
-import "./styles.css";
+import "./SearchBtns.css";
 
 export const MainSearchBtn: React.FC = () => {
   const overlayRef = useRef<HTMLDivElement>(null);

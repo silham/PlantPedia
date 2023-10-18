@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import "./styles.css";
-import { MainSearchBtn, SideSearchBtn } from "./SearchBtns";
+import { MainSearchBtn, SideSearchBtn } from "./components/SearchBtns";
 import PlantOfDay from "./PlantOfDay";
 import Chat from "./components/Chat/Chat";
 import TrendingTopics from "./TrendingTopics";

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import "./styles.css";
 import { MainSearchBtn, SideSearchBtn } from "./components/SearchBtns";
 import PlantOfDay from "./PlantOfDay";
 import Chat from "./components/Chat/Chat";
@@ -12,7 +11,7 @@ import About from "./About";
 const Home = () => {
   return (
     <>
-      <section className="h-[100vh] w-[100vw] px-[100px] hero bg-cover text-white">
+      <section className="h-[100vh] w-[100vw] px-[100px] bg-[url(/hero-bg.webp)] bg-cover text-white">
         <header className="h-[10vh] w-full flex justify-between py-2 items-center">
           <div className="h-full flex items-center justify-center">
             <Image src="/plantpedia.png" width={200} height={90} alt="logo" />

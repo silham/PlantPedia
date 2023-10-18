@@ -7,6 +7,7 @@ import Chat from "../Chat/Chat";
 import TrendingTopics from "./TrendingTopics";
 import ContactUs from "./Contact";
 import AgroAI from "./AgroAI";
+import About from "./About";
 
 const Home = () => {
   return (
@@ -56,8 +57,13 @@ const Home = () => {
       </section>
 
       <section className="w-[100vw] px-[180px]">
+        <About />
+      </section>
+
+      <section className="w-[100vw] px-[180px]">
         <ContactUs />
       </section>
+
       <SideSearchBtn />
       <Chat />
     </>

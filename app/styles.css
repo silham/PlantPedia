@@ -1,42 +1,33 @@
-.heading-txt {
-  font-family: "Inter", sans-serif;
-}
-.hero_bg_gradient {
-  background: rgb(114, 166, 3);
-  background: -moz-linear-gradient(
-    0deg,
-    rgba(114, 166, 3, 1) 0%,
-    rgba(27, 64, 1, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    0deg,
-    rgba(114, 166, 3, 1) 0%,
-    rgba(27, 64, 1, 1) 100%
-  );
-  background: linear-gradient(
-    0deg,
-    rgba(114, 166, 3, 1) 0%,
-    rgba(27, 64, 1, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#72a603",endColorstr="#1b4001",GradientType=1);
+.hero {
+  background-image: url("/hero-bg.webp");
 }
 
-.header_bg_gradient {
-  background: rgb(114, 166, 3);
-  background: -moz-linear-gradient(
-    0deg,
-    rgb(91, 131, 4) 0%,
-    rgba(27, 64, 1, 1) 100%
-  );
-  background: -webkit-linear-gradient(
-    0deg,
-    rgba(91, 131, 4) 0%,
-    rgba(27, 64, 1, 1) 100%
-  );
-  background: linear-gradient(
-    0deg,
-    rgba(91, 131, 4) 0%,
-    rgba(27, 64, 1, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#72a603",endColorstr="#1b4001",GradientType=1);
+.animate-sideSearchBtn-in {
+  animation: animation-search-in 500ms ease-in forwards;
+}
+
+@keyframes animation-search-in {
+  0% {
+    opacity: 0;
+    right: 0;
+  }
+  100% {
+    opacity: 1;
+    right: 60px;
+  }
+}
+
+.animate-sideSearchBtn-out {
+  animation: animation-search-out 500ms ease-out forwards;
+}
+
+@keyframes animation-search-out {
+  0% {
+    opacity: 1;
+    right: 60px;
+  }
+  100% {
+    opacity: 0;
+    right: 0;
+  }
 }

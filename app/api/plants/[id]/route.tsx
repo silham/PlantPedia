@@ -15,6 +15,6 @@ export async function GET(request: NextRequest, { params: { id } }: Props) {
   if (plants !== null) {
     return NextResponse.json(plants);
   } else {
-    return NextResponse.error();
+    return NextResponse.json("plant not found");
   }
 }

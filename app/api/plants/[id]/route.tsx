@@ -11,6 +11,9 @@ export async function GET(request: NextRequest, { params: { id } }: Props) {
     where: {
       id: s_name,
     },
+    include: {
+      taxonomy: true,
+    },
   });
   if (plants !== null) {
     return NextResponse.json(plants);

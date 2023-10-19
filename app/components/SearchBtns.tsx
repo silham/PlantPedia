@@ -1,19 +1,17 @@
 "use client";
 import SearchBox from "@/app/components/SearchBox";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./SearchBtns.css";
 
 export const MainSearchBtn: React.FC = () => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  // This function is called when the "Start Searching" button gets clicked
   const openSearch = () => {
     if (overlayRef.current) {
       overlayRef.current.style.width = "100%";
     }
   };
 
-  // This function is called when the "Close" button is clicked
   const closeSearch = () => {
     if (overlayRef.current) {
       overlayRef.current.style.width = "0%";
@@ -76,17 +74,19 @@ export const MainSearchBtn: React.FC = () => {
   );
 };
 
-export const SideSearchBtn: React.FC = () => {
+interface Props {
+  isHome: boolean;
+}
+
+export const SideSearchBtn: React.FC<Props> = ({ isHome }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  // This function is called when the "Start Searching" button gets clicked
   const openSearch = () => {
     if (overlayRef.current) {
       overlayRef.current.style.width = "100%";
     }
   };
 
-  // This function is called when the "Close" button is clicked
   const closeSearch = () => {
     if (overlayRef.current) {
       overlayRef.current.style.width = "0%";
@@ -97,32 +97,35 @@ export const SideSearchBtn: React.FC = () => {
       const sideSearchBtn = document.getElementById("sideSearchBtn");
       var vh = window.innerHeight;
       var scrollHeight = window.scrollY;
-      if (
-        scrollHeight < vh * 0.2 &&
-        sideSearchBtn?.classList.contains("animate-sideSearchBtn-in")
-      ) {
-        sideSearchBtn.classList.remove("animate-sideSearchBtn-in");
-        sideSearchBtn.classList.add("animate-sideSearchBtn-out");
-      }
-      if (scrollHeight >= vh * 0.2) {
-        sideSearchBtn?.classList.remove("animate-sideSearchBtn-out");
-        sideSearchBtn?.classList.add("animate-sideSearchBtn-in");
+      if (isHome) {
+        if (
+          scrollHeight < vh * 0.2 &&
+          sideSearchBtn?.classList.contains("animate-sideSearchBtn-in")
+        ) {
+          sideSearchBtn.classList.remove("animate-sideSearchBtn-in");
+          sideSearchBtn.classList.add("animate-sideSearchBtn-out");
+        }
+        if (scrollHeight >= vh * 0.2) {
+          sideSearchBtn?.classList.remove("animate-sideSearchBtn-out");
+          sideSearchBtn?.classList.add("animate-sideSearchBtn-in");
+        }
       }
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    // Cleanup function to remove the event listener
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
+  }, []);
 
   return (
     <>
       <div
         id="sideSearchBtn"
-        className="fixed bottom-[50px] right-0 opacity-0 rounded-full bg-custom-blue-green shadow-xl w-[50px] h-[50px] flex items-center justify-center cursor-pointer hover:scale-110 duration-150 ease-in-out"
+        className={`fixed bottom-[50px] ${
+          isHome ? "right-0 opacity-0" : "right-[60px] opacity-100"
+        } rounded-full bg-custom-blue-green shadow-xl w-[50px] h-[50px] flex items-center justify-center cursor-pointer hover:scale-110 duration-150 ease-in-out`}
         onClick={openSearch}
       >
         <i className="text-[24px] text-white ri-search-2-line"></i>
@@ -130,7 +133,7 @@ export const SideSearchBtn: React.FC = () => {
       {/* The search overlay */}
       <div
         ref={overlayRef}
-        className="flex h-[100vh] max-h-[100vh] w-0 fixed top-0 left-0 bg-black bg-opacity-90 duration-500 overflow-hidden z-10 "
+        className="flex h-[100vh] max-h-[100vh] w-0 fixed top-0 left-0 bg-black bg-opacity-90 duration-500 overflow-hidden z-30 "
       >
         <button
           className="absolute top-[20px] right-10 text-[60px] border-none bg-transparent cursor-pointer text-white"

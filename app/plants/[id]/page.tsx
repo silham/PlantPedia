@@ -5,8 +5,22 @@ import Image from "next/image";
 import ImageGallery from "react-image-gallery";
 import ViewTracker from "@/app/utils/TrackViews";
 import Loader from "./Loader";
+import Chat from "@/app/components/Chat/Chat";
+import { SideSearchBtn } from "@/app/components/SearchBtns";
+import Footer from "@/app/components/Footer";
 interface Props {
   params: { id: string };
+}
+
+interface Taxonomy {
+  id: string;
+  kingdom: string;
+  phylum: string;
+  class: string;
+  order: string;
+  family: string;
+  genus: string;
+  species: string;
 }
 
 interface Plant {
@@ -28,6 +42,7 @@ interface Plant {
   img: string;
   imgs: string[];
   taxonomyId: string;
+  taxonomy: Taxonomy;
 }
 
 const Plant = ({ params: { id } }: Props) => {
@@ -88,48 +103,205 @@ const Plant = ({ params: { id } }: Props) => {
 
   return (
     <>
-      <div className="w-screen bg-slate-100 min-h-[200vh]">
-        <header className="py-2 fixed z-20 top-0 left-0 flex flex-row justify-between items-center w-full px-[100px] bg-slate-50 shadow-lg">
-          <div className="h-full flex items-center justify-center">
-            <Image src="/plantpedia.png" width={200} height={90} alt="logo" />
+      {plant ? (
+        <>
+          <div className="w-full flex pt-20 flex-row px-[100px] text-gray-900 text-[32px] min-h-160px py-3 justify-center">
+            <h1 className="font-black">{plant.common_name}&nbsp;</h1>
+            &#40;
+            <h2 className="font-semibold italic text-gray-800">
+              {plant.scientific_name}
+            </h2>
+            &#41;
           </div>
-          <nav className="flex justify-between text-[16px] font-semibold text-gray-900 w-[25%]">
-            <Link href="/plants">Plants</Link>
-            <Link href="/blogs">Blogs</Link>
-            <Link href="/about#">About</Link>
-          </nav>
-        </header>
-        {plant ? (
-          <>
-            <div className="w-full flex pt-20 flex-row px-[100px] text-gray-900 text-[32px] min-h-160px py-3 justify-center">
-              <h1 className="font-black">{plant.common_name}&nbsp;</h1>
-              &#40;
-              <h2 className="font-semibold italic text-gray-800">
-                {plant.scientific_name}
-              </h2>
-              &#41;
+          <div className="w-full flex flex-row px-[100px] mb-4">
+            <div className="flex-1">
+              {imgArray && imgArray?.length > 0 ? (
+                <ImageGallery items={imgArray} showNav={false} />
+              ) : (
+                <ImageGallery items={images} showNav={false} />
+              )}
             </div>
-            <div className="w-full flex flex-row px-[100px]">
-              <div className="flex-1">
-                {imgArray ? (
-                  <ImageGallery items={imgArray} showNav={false} />
-                ) : (
-                  <ImageGallery items={images} showNav={false} />
-                )}
+            <div className="flex-1 px-4">
+              <div className="w-full text-gray-900 text-[16px] text-justify font-medium flex flex-row">
+                <p>{plant.description}</p>
               </div>
-              <div className="flex-1 px-2">
-                <div className="w-full text-gray-900 text-[18px] font-medium flex flex-row">
-                  <h3>Common name :</h3>
-                  {plant ? <h3>&nbsp;{plant.common_name}</h3> : null}
+              {plant.synonyms.length > 0 ? (
+                <div className="text-gray-800 text-[16px] flex flex-row mt-4 font-medium">
+                  <p>
+                    &#x25C9;&nbsp;
+                    <span className="font-bold text-gray-900">Synonyms : </span>
+                    {plant.synonyms.map((synonym, index) => {
+                      if (index != plant.synonyms.length - 1) {
+                        return synonym + ", ";
+                      } else {
+                        return synonym;
+                      }
+                    })}
+                  </p>
                 </div>
+              ) : null}
+              {(plant.min_h || plant.max_h) && (
+                <div className="text-gray-800 text-[16px] flex flex-row mt-4 font-medium">
+                  <p>
+                    &#x25C9;&nbsp;
+                    <span className="font-bold text-gray-900">
+                      Average height :{" "}
+                    </span>
+                    {plant.min_h && plant.max_h
+                      ? plant.min_h / 100 + "m ~ " + plant.max_h / 100 + "m"
+                      : plant.min_h / 100 || plant.max_h / 100 + "m"}
+                  </p>
+                </div>
+              )}
+              {(plant.min_temp || plant.max_temp) && (
+                <div className="text-gray-800 text-[16px] flex flex-row mt-4 font-medium">
+                  <p>
+                    &#x25C9;&nbsp;
+                    <span className="font-bold text-gray-900">
+                      Suitable temperature :{" "}
+                    </span>
+                    {plant.min_temp && plant.max_temp
+                      ? plant.min_temp + "°C ~ " + plant.max_temp + "°C"
+                      : plant.min_temp || plant.max_temp + "°C"}
+                  </p>
+                </div>
+              )}
+              {(plant.min_ph || plant.max_ph) && (
+                <div className="text-gray-800 text-[16px] flex flex-row mt-4 font-medium">
+                  <p>
+                    &#x25C9;&nbsp;
+                    <span className="font-bold text-gray-900">
+                      Suitable pH range :{" "}
+                    </span>
+                    {plant.min_ph && plant.max_temp
+                      ? plant.min_ph + " ~ " + plant.max_ph
+                      : plant.min_ph || plant.max_ph}
+                  </p>
+                </div>
+              )}
+              <div className="text-gray-800 text-[16px] flex flex-row mt-4 font-medium">
+                <p>
+                  &#x25C9;&nbsp;
+                  <span className="font-bold text-gray-900">
+                    Water requirement :{" "}
+                  </span>
+                  {plant.water == "L"
+                    ? "Low"
+                    : plant.water == "M"
+                    ? "Medium"
+                    : "High"}
+                </p>
               </div>
+              <div className="text-gray-800 text-[16px] flex flex-row mt-4 font-medium">
+                <p>
+                  &#x25C9;&nbsp;
+                  <span className="font-bold text-gray-900">
+                    Growth habit :{" "}
+                  </span>
+                  {plant.habit}
+                </p>
+              </div>
+              <div className=" flex flex-row mt-4 ">
+                <p className="text-gray-800 text-[16px] font-bold">
+                  <span className="font-medium">&#x25C9;&nbsp;</span>Taxonomy :
+                </p>
+              </div>
+
+              <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-3 mt-2">
+                <table className="w-full text-sm text-left text-gray-700 ">
+                  <tbody>
+                    <tr className="bg-gray-300 border-b">
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                      >
+                        Kingdom
+                      </th>
+                      <td className="px-6 py-4">{plant.taxonomy.kingdom}</td>
+                    </tr>
+                    <tr className="border-b bg-gray-200 ">
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                      >
+                        Phylum
+                      </th>
+                      <td className="px-6 py-4">{plant.taxonomy.phylum}</td>
+                    </tr>
+                    <tr className="bg-gray-300 border-b">
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                      >
+                        Class
+                      </th>
+                      <td className="px-6 py-4">{plant.taxonomy.class}</td>
+                    </tr>
+                    <tr className="border-b bg-gray-200 ">
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                      >
+                        Order
+                      </th>
+                      <td className="px-6 py-4">{plant.taxonomy.order}</td>
+                    </tr>
+                    <tr className="bg-gray-300 border-b">
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                      >
+                        Family
+                      </th>
+                      <td className="px-6 py-4">{plant.taxonomy.family}</td>
+                    </tr>
+                    <tr className="border-b bg-gray-200 ">
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                      >
+                        Genus
+                      </th>
+                      <td className="px-6 py-4">{plant.taxonomy.genus}</td>
+                    </tr>
+                    <tr className="bg-gray-300 border-b">
+                      <th
+                        scope="row"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                      >
+                        Species
+                      </th>
+                      <td className="px-6 py-4">{plant.taxonomy.species}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              {(plant.britannica || plant.wikipedia) && (
+                <div className="text-gray-800 text-[16px] flex flex-row mt-4 font-medium">
+                  &#x25C9;&nbsp;
+                  <span className="font-bold text-gray-900">
+                    Read further :{" "}
+                  </span>
+                  <div className="flex flex-col ml-2 text-blue-900">
+                    {plant.wikipedia && (
+                      <a href={plant.wikipedia} target="_blank">
+                        Wikipedia <i className="ri-external-link-line"></i>
+                      </a>
+                    )}
+                    {plant.britannica && (
+                      <a href={plant.britannica} target="_blank">
+                        Britannica <i className="ri-external-link-line"></i>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
-          </>
-        ) : (
-          <Loader />
-        )}
-      </div>
-      {/*isPlantFound ? <ViewTracker id={plantId} /> : null*/}
+          </div>
+        </>
+      ) : (
+        <Loader />
+      )}
     </>
   );
 };

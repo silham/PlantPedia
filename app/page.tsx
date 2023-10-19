@@ -7,6 +7,7 @@ import TrendingTopics from "./TrendingTopics";
 import ContactUs from "./Contact";
 import AgroAI from "./AgroAI";
 import About from "./About";
+import Footer from "./components/Footer";
 
 const Home = () => {
   return (
@@ -63,7 +64,11 @@ const Home = () => {
         <ContactUs />
       </section>
 
-      <SideSearchBtn />
+      <footer className="w-[100vw]">
+        <Footer />
+      </footer>
+
+      <SideSearchBtn isHome={true} />
       <Chat />
     </>
   );

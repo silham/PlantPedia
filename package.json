@@ -11,6 +11,8 @@
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
     "@prisma/client": "^5.4.1",
+    "@types/animejs": "^3.1.10",
+    "animejs": "^3.2.1",
     "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
     "emailjs-com": "^3.2.0",

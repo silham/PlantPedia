@@ -15,9 +15,6 @@ export async function GET(request: NextRequest, { params: { id } }: Props) {
       taxonomy: true,
     },
   });
-  if (plants !== null) {
-    return NextResponse.json(plants);
-  } else {
-    return NextResponse.json("plant not found");
-  }
+
+  return NextResponse.json(plants);
 }

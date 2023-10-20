@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import ImageGallery from "react-image-gallery";
 import Loader from "./Loader";
 import ViewTracker from "@/app/utils/TrackViews";
+import { notFound } from "next/navigation";
 interface Props {
   params: { id: string };
 }
@@ -76,6 +77,8 @@ const Plant = ({ params: { id } }: Props) => {
         isPlantFound.current = true;
         setImgs();
         isInitialized.current = true;
+      } else if (plant == null) {
+        notFound();
       }
     }
   }, [plant]);

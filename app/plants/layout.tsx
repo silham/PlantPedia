@@ -25,7 +25,6 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       </footer>
       <Chat />
       <SideSearchBtn isHome={false} />
-      {/*isPlantFound ? <ViewTracker id={plantId} /> : null*/}
     </>
   );
 };

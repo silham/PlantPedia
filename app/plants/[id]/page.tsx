@@ -1,13 +1,8 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import ImageGallery from "react-image-gallery";
-import ViewTracker from "@/app/utils/TrackViews";
 import Loader from "./Loader";
-import Chat from "@/app/components/Chat/Chat";
-import { SideSearchBtn } from "@/app/components/SearchBtns";
-import Footer from "@/app/components/Footer";
+import ViewTracker from "@/app/utils/TrackViews";
 interface Props {
   params: { id: string };
 }
@@ -298,6 +293,7 @@ const Plant = ({ params: { id } }: Props) => {
               )}
             </div>
           </div>
+          {isPlantFound ? <ViewTracker id={plantId} /> : null}
         </>
       ) : (
         <Loader />

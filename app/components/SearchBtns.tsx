@@ -125,10 +125,10 @@ export const SideSearchBtn: React.FC<Props> = ({ isHome }) => {
         id="sideSearchBtn"
         className={`fixed bottom-[50px] ${
           isHome ? "right-0 opacity-0" : "right-[60px] opacity-100"
-        } rounded-full bg-custom-blue-green shadow-xl w-[50px] h-[50px] flex items-center justify-center cursor-pointer hover:scale-110 duration-150 ease-in-out`}
+        } rounded-full bg-custom-blue-green hover:text-custom-blue-green hover:bg-white hover:bg-opacity-30 hover:border-2 hover:border-custom-blue-green shadow-xl w-[50px] h-[50px] flex items-center justify-center cursor-pointer hover:scale-110 duration-150 ease-in-out`}
         onClick={openSearch}
       >
-        <i className="text-[24px] text-white ri-search-2-line"></i>
+        <i className="text-[24px] text-white hover:text-custom-blue-green ri-search-2-line"></i>
       </div>
       {/* The search overlay */}
       <div

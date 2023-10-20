@@ -94,7 +94,7 @@ const Chat = () => {
         onClick={() => {
           setIsToggled(!isToggled);
         }}
-        className="fixed right-[60px] bottom-[115px] w-[50px] h-[50px] cursor-pointer bg-custom-blue-green hover:text-custom-blue-green text-white rounded-full flex items-center justify-center shadow-xl z-[1] hover:scale-110 duration-150 ease-in-out"
+        className="fixed right-[60px] bottom-[115px] w-[50px] h-[50px] cursor-pointer bg-custom-blue-green hover:text-custom-blue-green hover:bg-white hover:bg-opacity-30 hover:border-2 hover:border-custom-blue-green text-white rounded-full flex items-center justify-center shadow-xl z-[1] hover:scale-110 duration-150 ease-in-out"
       >
         <i
           className={`${

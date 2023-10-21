@@ -1,11 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/prisma/client";
 
 interface Props {
   params: { id: string };
 }
 
-export async function GET(request: NextRequest, { params: { id } }: Props) {
+export async function GET(
+  request: NextApiRequest,
+  res: NextApiResponse,
+  { params: { id } }: Props
+) {
   const s_name = id.toLowerCase().replace(/-/g, "_");
   const plants = await prisma.plants.findUnique({
     where: {
@@ -16,5 +20,9 @@ export async function GET(request: NextRequest, { params: { id } }: Props) {
     },
   });
 
-  return NextResponse.json(plants);
+  if (plants) {
+    return res.status(200).json(plants);
+  } else {
+    return res.status(404).json({ error: "Plant not found" });
+  }
 }

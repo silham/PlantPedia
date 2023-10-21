@@ -68,6 +68,9 @@ const Plant = ({ params: { id } }: Props) => {
     if (!isInitialized.current) {
       const fetchPlant = async () => {
         const res = await fetch(`/api/plants/${plantId}`);
+        if (!res.ok) {
+          notFound();
+        }
         const data: Plant = await res.json();
         setPlant(data);
       };
@@ -77,8 +80,6 @@ const Plant = ({ params: { id } }: Props) => {
         isPlantFound.current = true;
         setImgs();
         isInitialized.current = true;
-      } else if (plant == null) {
-        notFound();
       }
     }
   }, [plant]);
@@ -103,7 +104,7 @@ const Plant = ({ params: { id } }: Props) => {
     <>
       {plant ? (
         <>
-          <div className="w-full flex pt-20 flex-row px-[100px] text-gray-900 text-[32px] min-h-160px py-3 justify-center">
+          <div className="w-full flex pt-4 flex-row px-[100px] text-gray-900 text-[32px] min-h-160px py-3 justify-center">
             <h1 className="font-black">{plant.common_name}&nbsp;</h1>
             &#40;
             <h2 className="font-semibold italic text-gray-800">

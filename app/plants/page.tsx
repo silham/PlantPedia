@@ -25,7 +25,7 @@ const Page = () => {
     <div className="min-h-screen -mt-16 w-screen px-[100px]">
       {plants ? (
         <>
-          <div className="w-full flex pt-36 flex-row text-gray-900 font-bold text-[32px] min-h-160px py-3 justify-center">
+          <div className=" w-full flex pt-20 flex-row text-gray-900 font-black text-[32px] min-h-160px py-3 justify-center">
             <h1>Explore all indexed Plants</h1>
           </div>
 
@@ -61,7 +61,9 @@ const Page = () => {
                           {plant.common_name}
                         </th>
                       </Link>
-                      <td className="px-6 py-4">{plant.scientific_name}</td>
+                      <td className="px-6 py-4 italic">
+                        {plant.scientific_name}
+                      </td>
                       <td className="px-6 py-4">
                         {plant.synonyms.map((synonym, index) => {
                           if (index != plant.synonyms.length - 1) {

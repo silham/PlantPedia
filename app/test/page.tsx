@@ -1,4 +1,4 @@
-import { Navbar } from "../components/Nav";
+import { Navbar } from "../components/Nav"; // import
 
 const Test = () => {
   return (

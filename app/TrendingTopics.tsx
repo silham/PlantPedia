@@ -18,7 +18,9 @@ const TrendingTopics = () => {
     if (!isInitialized.current) {
       const fetchData = async () => {
         try {
-          const res = await fetch(`http://localhost:3000/api/plants/trending`);
+          const res = await fetch(`http://localhost:3000/api/plants/trending`, {
+            cache: "no-store",
+          });
           const data = await res.json();
           setPlants(data);
         } catch (error) {

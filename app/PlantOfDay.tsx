@@ -22,7 +22,9 @@ const PlantOfDay = () => {
     if (!isInitialized.current) {
       const fetchPod = async () => {
         try {
-          const res = await fetch(`http://localhost:3000/api/pod`);
+          const res = await fetch(`http://localhost:3000/api/pod`, {
+            cache: "no-store",
+          });
           const data = await res.json();
           setPod(data);
         } catch (error) {

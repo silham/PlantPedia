@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
                 viewId: viewId,
             }
         })
-        return NextResponse.json(view);
+        return NextResponse.json({status : "done"});
     }
-    return null;
+    return NextResponse.json({status : "error"});
 }
